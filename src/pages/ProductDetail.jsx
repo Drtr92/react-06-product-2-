@@ -1,5 +1,6 @@
 import styles from "./ProductDetail.module.css";
 import { useParams } from "react-router";
+import { useEffect } from "react";
 
 function ProductDetail() {
     // 사용자가 "나 저 상품 상세 내용을 보고 싶어"를 요청한 상황

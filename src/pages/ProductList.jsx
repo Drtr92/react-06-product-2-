@@ -42,7 +42,7 @@ function ProductList() {
             <div className={styles.listWrap}>
                 {list.map(item => {
                     return (
-                        <Link to={`/products/${item.id}`} key={item.id} className={styles.card}>
+                        <Link to={`/product/${item.id}`} key={item.id} className={styles.card}>
                             <img
                                 src={item.thumbnail}
                                 alt={item.title}
