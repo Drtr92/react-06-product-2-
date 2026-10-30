@@ -1,7 +1,13 @@
 import styles from "./ProductDetail.module.css"
 
 function ProductDetail() {
-    return <>ProductDetail</>;
+    return (
+        <>
+            <div className={styles.dummy}>
+                ProductDetail
+            </div>
+        </>
+    );
 }
 
 export default ProductDetail;

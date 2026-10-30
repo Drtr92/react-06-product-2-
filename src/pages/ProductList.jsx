@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./styles/App.module.css";
+import styles from "./ProductList.module.css";
 
 function ProductList() {
         const [list, setList] = useState([]);
@@ -22,7 +22,9 @@ function ProductList() {
             return <div>데이터를 로드 중입니다...</div>;
         }
 
-        return <></>;
+        return <>
+            <div className={styles.dummy}>{list}</div>
+        </>;
 }
 
 export default ProductList;
