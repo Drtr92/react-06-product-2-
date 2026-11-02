@@ -1,6 +1,6 @@
 import styles from "./ProductDetail.module.css";
-import { useParams } from "react-router";
-import { useEffect } from "react";
+import { Link, useParams } from "react-router";
+import { useEffect, useState } from "react";
 
 function ProductDetail() {
     // 사용자가 "나 저 상품 상세 내용을 보고 싶어"를 요청한 상황
@@ -14,10 +14,71 @@ function ProductDetail() {
     // 화면에 출력
 
     // 구현 하세요~
+
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch(`https://dummyjson.com/products/${id}`)
+            .then(res => res.json())
+            .then(json => setProduct(json))
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false));
+        // .finally(함수) 메서드는 메서드 체인을 통해
+        // then을 통해 성공 시나리오든, catch를 통한 실패 시나리오든
+        // 상관없이 마지막에 실행되어야 하는 내용을 기록
+    }, [id]);
+
+    // 초기 렌더링에는 loading이 true이므로, 이 아래 if가 출력
+    if (loading) {
+        return <div className={styles.loading}>LOADING...</div>;
+    }
+
+    // useEffect가 발동해서 fetch가 실행되는데
+    // 정상적으로 데이터를 받아오든, 받아오지 못하든 loading은 false가 됨
+    // 잉 아래로 내려오는데 실패되면 product state는 갱신되지 못 하고 null로 남아있음
+
+    if (!product) {
+        return <div className={styles.empty}>상품을 찾을 수 없습니다.</div>;
+    }
+
+    //loading 도 false이고, product도 있는 상황
+
     return (
-        <>
-            <div className={styles.dummy}>ProductDetail</div>
-        </>
+        <div className={styles.container}>
+            {/*
+                react-router가 주소를 관리하는 방식은
+                "실제 브라우저의 주소"를 갱신하는게 아니라,
+                주소표시줄에 "보여지는 것만" 바꿔 쓰는 것
+
+                react는 SPA (Single Page Application)
+                        => 브라우저가 관리하는 페이지가 하나
+
+                react-router 에서 불러온 Link 컴포넌트는
+                a 태그로 화면에는 그려지며,
+                그러한 기능 (보여지는 것만 바꿔준다는) 이
+                포함되어 있는 컴포넌트
+
+                a 태그는 inline 방식이며, margin이 존재하지 않음
+            */}
+            <Link to={"/"} className={styles.backBtn}>
+                &larr; 목록으로
+            </Link>
+            <div className={styles.content}>
+                <img src={product.thumbnail} alt={product.title} className={styles.image} />
+                <div className={styles.info}>
+                    <h1 className={styles.title}>{product.title}</h1>
+                    <p className={styles.description}>{product.description}</p>
+                    <ul className={styles.meta}>
+                        <li>
+                            <span className={styles.badge}>{product.category}</span>
+                        </li>
+                        <li>평점: {product.rating}</li>
+                        <li className={styles.price}>$ {product.price}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     );
 }
 

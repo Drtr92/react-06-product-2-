@@ -18,7 +18,7 @@ function App() {
                     "/product/상품번호"
                  */}
                 <Route path={"/"} element={<ProductList />} />
-                <Route path={"/product/:id"} element={<ProductDetail />} />
+                <Route path={"/products/:id"} element={<ProductDetail />} />
                 {/*
                     path에 "./product/:id" 라고 적게 되면,
                     사용자가 경로를 통해 화면을 요청을 할 때
