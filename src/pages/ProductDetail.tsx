@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import { Product } from "./ProductList";
+import type { Product } from "./ProductList";
 
 function ProductDetail() {
     const { id } = useParams();     // string | undefined
