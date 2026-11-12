@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
+// Todo 리스트 페이지 styled components 적용 시켜놓기
 // 그러면, 매 백엔드 요청을 보내서 데이터를 받아올 때
 // 이 모든 내용들을 타입으로 지정해서 써야 되는가?
 export type Product = {
